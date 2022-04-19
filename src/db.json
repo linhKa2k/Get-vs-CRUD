@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Item 1",
+      "school": "TH"
+    },
+    {
+      "id": 2,
+      "name": "Item 2",
+      "school": "THCS"
+    },
+    {
+      "id": 3,
+      "name": "Item 3",
+      "school": "THPT"
+    },
+    {
+      "name": "linh",
+      "id": 4
+    },
+    {
+      "name": "sfs",
+      "id": 5
+    }
+  ]
+}
