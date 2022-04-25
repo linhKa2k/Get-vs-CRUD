@@ -1,122 +1,42 @@
-// import React from "react"; 
-// import Items from '../components/Items'; 
-// import * as actions from "../actions/ItemPageActions";
-// import {connect} from "react-redux"; 
-
-// class ItemPageContainer extends React.Component {  
-//     componentDidMount(){  
-//         this.props.initLoad() 
-//     }
-
-//     render() { 
-//         return (
-//             <Items {...this.props} /> 
-//         );
-//     }
-// }
-
-// const mapStateToProps = (state) => {  
-//     return {
-//         listData: state.itemsReducer.listItem
-//     }
-// }
-
-
-// const mapDispatchToProps = (dispatch) =>{ 
-//     return {
-//         initLoad : () => {
-//             dispatch(actions.getListItem()) 
-//         } 
-//     } 
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(ItemPageContainer)
-
-
-   
-// import React from 'react';
-// import Items from '../components/Items'
-// import * as actions from '../actions/ItemPageActions'
-// import {connect} from 'react-redux';
-
-// class ItemPageContainer extends React.Component {
-//     componentDidMount() {
-//         this.props.initLoad();
-//     }
-
-//     render() {
-
-//         return (
-//             <Items {...this.props} />
-//         )
-//     }
-// }
-
-// const mapStateToProps = (state) => {
-//     return {
-//         listData: state.itemsReducer.listItem
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         initLoad: () => ( dispatch(actions.getListItem())) ,
-//         addItem: (action) => (dispatch (actions.addItem(action))),
-           
-        
-//         }   
-        
-//     }
-
-
-// export default connect(mapStateToProps, mapDispatchToProps)(ItemPageContainer)
-
-
-import React from 'react'
-import Items from '../components/Items'
-import * as actions from '../actions/ItemPageActions'
-import {connect} from 'react-redux'
+import React from "react";
+import Items from "../components/Items";
+import * as actions from "../actions/ItemPageActions";
+import { connect } from "react-redux";
 
 class ItemPageContainer extends React.Component {
+  componentDidMount() {
+    this.props.initLoad();
+  }
 
-    componentDidMount(){
-        this.props.initLoad()
-    }
-
-
-
-    render() {
-
-
-        return (    
-            <Items {...this.props} />
-        )
-    }
+  render() {
+    return <Items {...this.props} />;
+  }
 }
-
 
 const mapStateToProps = (state) => {
-    return {
-        listData: state.itemsReducer.listItem
-    }
-
-}
+  return {
+    listData: state.itemsReducer.listItem,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-    initLoad : () => {
-     dispatch(actions.getListItem())
-     },
-    addItems : (action) => {
-        dispatch(actions.addItem(action))
+  return {
+    initLoad: () => {
+      dispatch(actions.getListItem());
+    },
+    addItems: (data) => {
+      dispatch(actions.addItem(data));
     },
     deleteData: (data) => {
-        dispatch(actions.deleteItem(data))
+      dispatch(actions.deleteItem(data));
+    },
+    updateData: (data) => {
+      dispatch(actions.updateItem(data));
+    },
+    searchData: (data) => {
+      dispatch(actions.searchItem(data));
     }
+  };
+};
 
-
-}
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ItemPageContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ItemPageContainer);

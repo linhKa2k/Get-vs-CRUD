@@ -1,8 +1,4 @@
-import ItemPage from './ItemPage'
-import HomePage from './HomePage'
+import ItemPage from "./ItemPage";
+import HomePage from "./HomePage";
 
-export  {
-    HomePage,
-    ItemPage
-}
-
+export { HomePage, ItemPage };

@@ -1,117 +1,90 @@
-// export default function callApi(){
-
-//     return new Promise((resolve, reject) => {
-//         const url = 'http://localhost:3001/items';
-//         // console.log(url);
-
-//         fetch(url, {
-//             method: 'GET'
-//         })
-
-//           .then((response) => response.json())
-//           .then((res) => {
-//             resolve(res);
-
-            
-         
-//         })
-//         .catch((error) => {
-//             reject(error);
-//         });
-//     });
-//  }
-
-
-// export  function callApi() {
-//     return new Promise((resolve, reject) => {
-//         const url = 'http://localhost:3001/items'
-
-//         fetch(url, {
-//             method: 'GET'
-//         })
-
-//         .then((response) => response.json())
-//         .then((res) => {
-//             resolve(res);
-//         })
-//         .catch((error) => {
-//             reject(error);
-//         })
-        
-//     });
-// }
-
-// export  function addAPI(data) {
-//     return new Promise((resolve, reject) => {
-//         const url = 'http://localhost:3001/items'
-
-//         fetch(url, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//            },
-//            body: JSON.stringify(data)
-//         })
-
-//         .then((response) => response.json())
-//         .then((res) => {
-//             resolve(res);
-//         })
-//         .catch((error) => {
-//             reject(error);
-//         })
-        
-//     });
-// }
-
-
 export function callApi() {
-    return new Promise((resolve, reject) => {
-        const url = 'http://localhost:3001/items'
+  return new Promise((resolve, reject) => {
+    const url = "http://localhost:3001/items";
 
-        fetch(url, {
-            method: 'GET',
-        })
-
-        .then((response) => response.json())
-        .then ((res) => {
-            resolve(res);
-        })
-        .catch((error) => {reject(error);})
-    });
+    fetch(url, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
-
 export function addApi(data) {
-    return new Promise((resolve, reject) => {
-        const url = 'http://localhost:3001/items'
+  // console.log( data,"data in fetch");
+  return new Promise((resolve, reject) => {
+    const url = "http://localhost:3001/items";
 
-        fetch(url, {
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(data)
-        })
-
-        .then((response) => response.json())
-        .then ((res) => {
-            resolve(res);
-        })
-        .catch((error) => {reject(error);})
-    });
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },  // thong bao server day la json
+      body: JSON.stringify(data), // chuyen doi tu doi tuong javaScript sang chuoi json 
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 export function deleteApi(data) {
-    return new Promise((resolve, reject) => {
-        const url = `http://localhost:3001/items/${data}`
+  return new Promise((resolve, reject) => {
+    const url = `http://localhost:3001/items/${data}`;
 
-        fetch(url, {
-            method: 'DELETE'
-        })
+    fetch(url, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
 
-        .then((response) => response.json())
-        .then ((res) => {
-            resolve(res);
-        })
-        .catch((error) => {reject(error);})
-    });
+export function updateApi(data) {
+
+  return new Promise((resolve, reject) => {
+    const url = `http://localhost:3001/items/${data.id}`;
+
+    fetch(url, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function searchApi(data) {
+  return new Promise((resolve, reject) => {
+    const url = `http://localhost:3001/items/?q=${data}`;
+
+    fetch(url, {
+      method: "GET"
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
