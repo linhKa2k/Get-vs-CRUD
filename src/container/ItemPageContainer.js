@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 class ItemPageContainer extends React.Component {
   componentDidMount() {
-    this.props.initLoad();
+    this.props.paginationData({ activePage: 1 });
   }
 
   render() {
@@ -14,8 +14,12 @@ class ItemPageContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state.itemsReducer, "itemm");
   return {
-    listData: state.itemsReducer.listItem,
+    listData: state.itemsReducer.listData,
+    totalPage: state.itemsReducer.totalPage,
+    activePage: state.itemsReducer.activePage,
+    textSearch: state.itemsReducer.textSearch,
   };
 };
 
@@ -35,7 +39,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     searchData: (data) => {
       dispatch(actions.searchItem(data));
-    }
+    },
+    paginationData: (data) => {
+      dispatch(actions.paginationItem(data));
+    },
+    searchPaginationData: (data) => {
+      dispatch(actions.searchPaginationItem(data));
+    },
   };
 };
 

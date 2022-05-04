@@ -7,11 +7,18 @@ class Items extends Component {
     name: "",
 
     update: { id: "", nameUpdate: "" },
-    search: { nameSearch: "" },
+    textSearch: "",
   };
 
   render() {
     let list = [];
+    let listButton = [];
+    let totalPage = this.props.totalPage;
+    let textSearch = this.props.textSearch;
+    for (let i = 1; i <= totalPage; i++) {
+      listButton.push(i);
+    }
+
     if (this.props.listData) {
       list = this.props.listData.map((item, key) => {
         return (
@@ -46,7 +53,6 @@ class Items extends Component {
         );
       });
     }
-
 
     return (
       <div>
@@ -91,7 +97,7 @@ class Items extends Component {
           </Button>
         </div>
 
-        <div>
+        {/* <div>
           <TextField
             label="nhap vao day"
             variant="outlined"
@@ -103,8 +109,27 @@ class Items extends Component {
           <Button
             style={{ width: 100, height: 50, marginTop: 20 }}
             variant="contained"
+            onClick={() => this.props.searchData(this.state.search.nameSearch)}
+          >
+            Search
+          </Button>
+        </div> */}
+
+        <div>
+          <TextField
+            label="Search Pagination"
+            variant="outlined"
+            style={{ width: 400, marginTop: 20 }}
+            onChange={(e) => this.setState({ textSearch: e.target.value })}
+          />
+          <Button
+            style={{ width: 100, height: 55, marginTop: 20 }}
+            variant="contained"
             onClick={() =>
-              this.props.searchData(this.state.search.nameSearch)
+              this.props.searchPaginationData({
+                textSearch: this.state.textSearch,
+                activePage: 1,
+              })
             }
           >
             Search
@@ -119,6 +144,45 @@ class Items extends Component {
             {list}
           </tbody>
         </table>
+
+        {/* {listButton.map((btn, key) => { 
+          return(
+            <button
+            key={key}
+            onClick={()=>{
+              this.props.paginationData({activePage: btn})
+            }}
+            style={{
+              backgroundColor: this.props.activePage === btn ? "red" : null,
+            }}
+            >
+              {btn}
+            </button>
+          )
+        })} */}
+
+        <div>
+          {listButton.map((btn, key) => {
+            return (
+              <button
+                key={key}
+                onClick={() => {
+                  textSearch
+                    ? this.props.searchPaginationData({
+                        textSearch,
+                        activePage: btn,
+                      })
+                    : this.props.paginationData({ activePage: btn });
+                }}
+                style={{
+                  backgroundColor: this.props.activePage === btn ? "red" : null,
+                }}
+              >
+                {btn}
+              </button>
+            );
+          })}
+        </div>
       </div>
     );
   }

@@ -1,3 +1,4 @@
+import * as types from "../constant";
 export function callApi() {
   return new Promise((resolve, reject) => {
     const url = "http://localhost:3001/items";
@@ -22,8 +23,8 @@ export function addApi(data) {
 
     fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },  // thong bao server day la json
-      body: JSON.stringify(data), // chuyen doi tu doi tuong javaScript sang chuoi json 
+      headers: { "Content-Type": "application/json" }, // thong bao server day la json
+      body: JSON.stringify(data), // chuyen doi tu doi tuong javaScript sang chuoi json
     })
       .then((response) => response.json())
       .then((res) => {
@@ -53,7 +54,6 @@ export function deleteApi(data) {
 }
 
 export function updateApi(data) {
-
   return new Promise((resolve, reject) => {
     const url = `http://localhost:3001/items/${data.id}`;
 
@@ -77,7 +77,41 @@ export function searchApi(data) {
     const url = `http://localhost:3001/items/?q=${data}`;
 
     fetch(url, {
-      method: "GET"
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function paginationApi(data) {
+  return new Promise((resolve, reject) => {
+    const url = `http://localhost:3001/items?_page=${data.activePage}&_limit=${types.limit}`;
+
+    fetch(url, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function searchPaginationApi(data) {
+  return new Promise((resolve, reject) => {
+    const url = `http://localhost:3001/items?_page=${data.activePage}&_limit=${types.limit}&q=u`;
+    console.log(url);
+    fetch(url, {
+      method: "GET",
     })
       .then((response) => response.json())
       .then((response) => {

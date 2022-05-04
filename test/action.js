@@ -2,7 +2,7 @@ import * as types from "../constant";
 
 export function getListItem() {
   return {
-    type: types.GET_ITEM_REQUEST,
+    type: types.GET_ITEM_REQUEST
   };
 }
 
@@ -27,18 +27,16 @@ export function updateItem(payload) {
   };
 }
 
-/* day la cach viet khac cua saga
-// export function getListItemSuccess (payload) {
-//     return ({
-//         type : types.GET_ITEM_SUCCESS,
-//         payload
-//     })
-// }
+export function searchItem(payload) {
+  return {
+    type: types.SEARCH_ITEM_REQUEST,
+    payload,
+  };
+}
 
-// export function getListItemFalure (payload) {
-//     return ({
-//         type : types.GET_ITEM_FAILURE,
-//         payload
-//     })
-// }
-*/
+export function paginationItem(payload) {
+  return {
+    type: types.PAGINATION_ITEM_REQUEST,
+    payload,
+  };
+}

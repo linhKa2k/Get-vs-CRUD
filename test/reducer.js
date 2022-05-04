@@ -6,6 +6,9 @@ const DEFAULT_STATE = {
   dataFetched: false,
   error: false,
   errorMessage: null,
+
+  totalPage: null,
+  activePage: null,
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -14,6 +17,8 @@ export default (state = DEFAULT_STATE, action) => {
     case types.ADD_ITEM_REQUEST:
     case types.DELETE_ITEM_REQUEST:
     case types.UPDATE_ITEM_REQUEST:
+    case types.SEARCH_ITEM_REQUEST:
+    case types.PAGINATION_ITEM_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -64,6 +69,35 @@ export default (state = DEFAULT_STATE, action) => {
         dataFetched: true,
       };
     case types.UPDATE_ITEM_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: action.payload.errorMessage,
+      };
+
+    case types.SEARCH_ITEM_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        dataFetched: true,
+        listItem: action.payload,
+      };
+    case types.SEARCH_ITEM_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: action.payload.errorMessage,
+      };
+
+    case types.PAGINATION_ITEM_SUCCESS:
+      return {
+        ...state,
+        dataFetched: true,
+        listItem: action.payload.data,
+        totalPage: action.payload.totalpage,
+      };
+
+    case types.PAGINATION_ITEM_FAILURE:
       return {
         ...state,
         error: true,

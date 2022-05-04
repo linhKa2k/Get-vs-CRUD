@@ -6,6 +6,9 @@ const DEFAULT_STATE = {
   dataFetched: false,
   error: false,
   errorMessage: null,
+
+  totalPage: null,
+  activePage: null,
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -15,6 +18,8 @@ export default (state = DEFAULT_STATE, action) => {
     case types.DELETE_ITEM_REQUEST:
     case types.UPDATE_ITEM_REQUEST:
     case types.SEARCH_ITEM_REQUEST:
+    case types.PAGINATION_ITEM_REQUEST:
+    case types.SEARCH_PAGINATION_ITEM_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -25,7 +30,7 @@ export default (state = DEFAULT_STATE, action) => {
         ...state,
         isFetching: false,
         dataFetched: true,
-        listItem: action.payload,
+        listData: action.payload,
       };
     case types.GET_ITEM_FAILURE:
       return {
@@ -71,19 +76,52 @@ export default (state = DEFAULT_STATE, action) => {
         errorMessage: action.payload.errorMessage,
       };
 
-      case types.SEARCH_ITEM_SUCCESS:
-        return {
-          ...state,
-          isFetching: false,
-          dataFetched: true,
-          listItem: action.payload
-        };
-      case types.SEARCH_ITEM_FAILURE:
-        return {
-          ...state,
-          error: true,
-          errorMessage: action.payload.errorMessage,
-        };
+    case types.SEARCH_ITEM_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        dataFetched: true,
+        listData: action.payload,
+      };
+    case types.SEARCH_ITEM_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: action.payload.errorMessage,
+      };
+    case types.PAGINATION_ITEM_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        dataFetched: true,
+        listData: action.payload.activePageData,
+        totalPage: action.payload.totalPage,
+        activePage: action.payload.activePage,
+      };
+
+    case types.PAGINATION_ITEM_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: action.payload.errorMessage,
+      };
+    case types.SEARCH_PAGINATION_ITEM_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        dataFetched: true,
+        listData: action.payload.totalSearch,
+        totalPage: action.payload.totalPage,
+        activePage: action.payload.activePage,
+        textSearch: action.payload.textSearch,
+      };
+
+    case types.SEARCH_PAGINATION_ITEM_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: action.payload.errorMessage,
+      };
 
     default:
       return state;

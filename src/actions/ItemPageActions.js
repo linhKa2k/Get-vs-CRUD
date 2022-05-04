@@ -34,6 +34,19 @@ export function searchItem(payload) {
   };
 }
 
+export function paginationItem(payload) {
+  return {
+    type: types.PAGINATION_ITEM_REQUEST,
+    payload,
+  };
+}
+
+export function searchPaginationItem(payload) {
+  return {
+    type: types.SEARCH_PAGINATION_ITEM_REQUEST,
+    payload,
+  };
+}
 /* day la cach viet khac cua saga
 // export function getListItemSuccess (payload) {
 //     return ({
