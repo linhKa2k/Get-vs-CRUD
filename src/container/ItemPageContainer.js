@@ -14,7 +14,7 @@ class ItemPageContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.itemsReducer, "itemm");
+  console.log(state, "itemm");
   return {
     listData: state.itemsReducer.listData,
     totalPage: state.itemsReducer.totalPage,

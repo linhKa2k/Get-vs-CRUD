@@ -31,7 +31,6 @@ function* getListItem() {
 function* addListData(action) {
   try {
     yield addApi(action.payload);
-    console.log(action.payload, "log cua addddddd");
 
     yield put({
       type: types.ADD_ITEM_SUCCESS,
@@ -39,7 +38,7 @@ function* addListData(action) {
 
     yield put({
       type: types.GET_ITEM_REQUEST,
-    });
+    }); 
   } catch (error) {
     yield put({
       type: types.ADD_ITEM_FAILURE,
@@ -108,11 +107,14 @@ function* paginationListData(action) {
   try {
     const activePageData = yield paginationApi(action.payload);
     const totalItem = yield callApi();
-    // const totalPage = Math.ceil(totalItem.length / types.limit);
     const totalPage = Math.ceil(totalItem.length / types.limit);
+    
     yield put({
       type: types.PAGINATION_ITEM_SUCCESS,
       payload: {
+        // activePageData: activePageData.data,
+        // totalPage: activePageData.totalPage,
+        // activePage: activePageData.actiPage,
         activePageData: activePageData,
         totalPage: totalPage,
         activePage: action.payload.activePage,

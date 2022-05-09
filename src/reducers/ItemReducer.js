@@ -9,6 +9,7 @@ const DEFAULT_STATE = {
 
   totalPage: null,
   activePage: null,
+  textSearch: null
 };
 
 export default (state = DEFAULT_STATE, action) => {

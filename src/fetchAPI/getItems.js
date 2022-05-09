@@ -17,7 +17,6 @@ export function callApi() {
 }
 
 export function addApi(data) {
-  // console.log( data,"data in fetch");
   return new Promise((resolve, reject) => {
     const url = "http://localhost:3001/items";
 
@@ -91,6 +90,7 @@ export function searchApi(data) {
 
 export function paginationApi(data) {
   return new Promise((resolve, reject) => {
+    // const url = `http://localhost:3001/pagination?actiPage=${data.activePage}&limit=${types.limit}`;
     const url = `http://localhost:3001/items?_page=${data.activePage}&_limit=${types.limit}`;
 
     fetch(url, {
@@ -108,8 +108,7 @@ export function paginationApi(data) {
 
 export function searchPaginationApi(data) {
   return new Promise((resolve, reject) => {
-    const url = `http://localhost:3001/items?_page=${data.activePage}&_limit=${types.limit}&q=u`;
-    console.log(url);
+      const url = `http://localhost:3001/items?_page=${data.activePage}&_limit=${types.limit}&q=${data.textSearch}`;
     fetch(url, {
       method: "GET",
     })
